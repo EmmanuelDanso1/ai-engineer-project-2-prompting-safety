@@ -4,6 +4,12 @@ from google import genai
 
 load_dotenv()
 
+from src.p2.input_validation import (
+    is_forbidden,
+    block_message,
+    escape_angle_brackets
+)
+
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 MODEL_NAME = "gemini-2.5-flash"
 
@@ -23,16 +29,28 @@ Rules:
 """
 
 def ask_bot(user_text: str) -> str:
+
+    # INPUT VALIDATION
+
+    blocked, matched = is_forbidden(user_text)
+
+    if blocked:
+        return block_message(matched)
+
+
+    # ESCAPE DELIMITERS
+    safe_text = escape_angle_brackets(user_text)
+
+    # CALL LLM
     response = client.models.generate_content(
         model=MODEL_NAME,
         contents=[
             SYSTEM_PROMPT,
-            user_text,
+            safe_text,
         ],
     )
 
     return response.candidates[0].content.parts[0].text.strip()
-
 
 if __name__ == "__main__":
     # Simple manual test

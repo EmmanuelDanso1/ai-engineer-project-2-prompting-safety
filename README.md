@@ -42,3 +42,11 @@ Prompt structure patterns that make prompt injection harder (but not impossible)
 Use clear delimiters to isolate user content from instructions.
 Implement the sandwich defense (reinforce instructions after user input).
 Add a predictable refusal behavior for "instruction override" attempts.
+
+## Project 13 -  Pre-LLM security layer
+Input validation and sanitization. Defensive prompting helps, but want traditional software security checks before untrusted user input ever reaches the model.
+
+- ## Objectives
+Implement simple keyword-based blocking for common injection phrases.
+Escape delimiter-breaking characters to prevent "tag closing" attacks.
+Run an adversarial test cycle: attack → patch → re-test.
