@@ -26,3 +26,11 @@ Format constraints (single word, fixed paragraphs)
 - ##  Grammar-Based Constraining
 When prompt-only constraints fail
 Comparison with prompt-based approaches
+
+## Project 11 - Prompt injection security
+The prompt-injection security block by teaching you what prompt injection is, why LLM applications need explicit defenses, and how to identify vulnerabilities.
+
+- ## Objectives
+Define prompt injection and distinguish direct vs. indirect injection.
+Recognize common attacker goals (goal hijacking, data exfiltration, DoS).
+Run simple injection tests against a vulnerable bot.
