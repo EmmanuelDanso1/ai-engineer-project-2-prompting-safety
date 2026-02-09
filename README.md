@@ -34,3 +34,11 @@ The prompt-injection security block by teaching you what prompt injection is, wh
 Define prompt injection and distinguish direct vs. indirect injection.
 Recognize common attacker goals (goal hijacking, data exfiltration, DoS).
 Run simple injection tests against a vulnerable bot.
+
+## Project 12 - Defensive prompting
+Prompt structure patterns that make prompt injection harder (but not impossible). The core techniques are delimiters, explicit refusals, and the sandwich defense.
+
+- ## Objectives
+Use clear delimiters to isolate user content from instructions.
+Implement the sandwich defense (reinforce instructions after user input).
+Add a predictable refusal behavior for "instruction override" attempts.
