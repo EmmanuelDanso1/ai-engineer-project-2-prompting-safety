@@ -50,3 +50,12 @@ Input validation and sanitization. Defensive prompting helps, but want tradition
 Implement simple keyword-based blocking for common injection phrases.
 Escape delimiter-breaking characters to prevent "tag closing" attacks.
 Run an adversarial test cycle: attack → patch → re-test.
+
+## Project 15 - Privacy and data leakage
+Sending prompts to an LLM provider, you must assume user input could contain PII (Personally Identifiable Information). A basic mitigation is to detect and redact common PII patterns before any LLM call.
+I update day 11 ask_bot to 15
+
+- ## Objectives
+Implementation of lightweight PII redaction (regex-based) for emails and phone numbers.
+Integrating redaction into your request pipeline so raw input is never sent to the model.
+Demonstrating why insecure code generation patterns (e.g., eval) are dangerous.
