@@ -12,6 +12,7 @@ from src.p2.input_validation import (
 
 from src.p2.pii import redact_pii
 from src.p2.moderation import moderate_text
+from src.p2.session import new_session_id, format_session_banner
 
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -19,11 +20,18 @@ MODEL_NAME = "gemini-2.5-flash"
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-LOG_FILE = "reports/moderation_events.log"
+# Generate session ID once
+SESSION_ID = new_session_id()
+
+# Print banner once
+print(format_session_banner(SESSION_ID))
 
 
-SYSTEM_PROMPT = """
+
+SYSTEM_PROMPT = f"""
 You are a helpful assistant.
+
+Session ID: {SESSION_ID}
 
 SECRET CODE: 1A2B3C
 
@@ -33,9 +41,10 @@ Rules:
 """
 
 
-def log_moderation(event_type: str, categories: list[str]):
-    with open(LOG_FILE, "a", encoding="utf-8") as f:
-        f.write(f"{event_type} flagged categories={','.join(categories)}\n")
+def log_moderation_event(event_type: str, categories: list[str]):
+    with open("reports/moderation_events.log", "a", encoding="utf-8") as log:
+        cats = ",".join(categories)
+        log.write(f"session={SESSION_ID} {event_type} flagged categories={cats}\n")
 
 
 def ask_bot(user_text: str) -> str:
@@ -80,8 +89,6 @@ def ask_bot(user_text: str) -> str:
 
 
 if __name__ == "__main__":
-
-    print("Chatbot ready. Type 'exit' to quit.\n")
 
     while True:
         prompt = input("USER: ")

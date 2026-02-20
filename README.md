@@ -67,3 +67,11 @@ Prompting and filters help, but policy classification should be handled by a spe
 Implement input moderation (block harmful user prompts before LLM call).
 Implement output moderation (block harmful model outputs before display).
 Design "graceful failure" messages when content is blocked.
+
+## Project 17 - Day 17 introduces end-user identification in requests
+ In production systems, linking requests to a non-PII user ID enables abuse monitoring, per-user rate limiting, and auditability.
+
+- ## Objectives
+Generate a non-PII user/session ID (UUID).
+Pass that ID in the API request where supported (e.g., user= gemini API calls).
+Document how user IDs support monitoring and compliance.
