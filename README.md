@@ -59,3 +59,11 @@ I update day 11 ask_bot to 15
 Implementation of lightweight PII redaction (regex-based) for emails and phone numbers.
 Integrating redaction into your request pipeline so raw input is never sent to the model.
 Demonstrating why insecure code generation patterns (e.g., eval) are dangerous.
+
+## Project 16 - Day 16 Introduces a dedicated Moderation API layer
+Prompting and filters help, but policy classification should be handled by a specialized moderation model that can detect harmful content more reliably than prompt-based approaches.
+
+- ## Objectives
+Implement input moderation (block harmful user prompts before LLM call).
+Implement output moderation (block harmful model outputs before display).
+Design "graceful failure" messages when content is blocked.
