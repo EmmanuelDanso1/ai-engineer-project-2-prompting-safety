@@ -1,32 +1,15 @@
 import re
+from typing import List
 
-REDACTED = "[REDACTED_PII]"
-
+# Improved regex for phone and email
+EMAIL_REGEX = re.compile(
+    r'[\w\.-]+(\+[\w-]+)?@[\w\.-]+\.\w+', re.IGNORECASE
+)
+PHONE_REGEX = re.compile(
+    r'(\+?\d[\d\s\.-]{7,}\d)', re.IGNORECASE
+)
 
 def redact_pii(text: str) -> str:
-    """
-    Redact emails and phone numbers from text.
-    """
-
-    # Email regex
-    email_pattern = re.compile(
-        r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-    )
-
-    # Phone number regex (supports many formats)
-    phone_pattern = re.compile(
-        r"""
-        (\+?\d{1,3}[\s-]?)?          # country code
-        (\(?\d{3}\)?[\s-]?)         # area code
-        \d{3}[\s-]?\d{4}            # number
-        """,
-        re.VERBOSE,
-    )
-
-    # Replace emails
-    text = email_pattern.sub(REDACTED, text)
-
-    # Replace phones
-    text = phone_pattern.sub(REDACTED, text)
-
+    text = EMAIL_REGEX.sub("[REDACTED_PII]", text)
+    text = PHONE_REGEX.sub("[REDACTED_PII]", text)
     return text

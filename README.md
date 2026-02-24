@@ -75,3 +75,11 @@ Design "graceful failure" messages when content is blocked.
 Generate a non-PII user/session ID (UUID).
 Pass that ID in the API request where supported (e.g., user= gemini API calls).
 Document how user IDs support monitoring and compliance.
+
+## Project 17 - Adversarial testing
+Attempt to bypass moderation (obfuscation/evasion) and PII redaction (format edge cases), then patch weaknesses and re-test in a security hardening cycle.
+
+- ## Objectives
+Design evasion attempts for moderation and keyword filters.
+Identify PII formats your redactor misses.
+Patch and validate fixes with repeatable tests.

@@ -41,10 +41,9 @@ Rules:
 """
 
 
-def log_moderation_event(event_type: str, categories: list[str]):
-    with open("reports/moderation_events.log", "a", encoding="utf-8") as log:
-        cats = ",".join(categories)
-        log.write(f"session={SESSION_ID} {event_type} flagged categories={cats}\n")
+def log_moderation(event_type, flagged, categories):
+    with open("reports/moderation_events.log", "a") as f:
+        f.write(f"session={session_id} {event_type} flagged categories={','.join(categories)}\n")
 
 
 def ask_bot(user_text: str) -> str:
