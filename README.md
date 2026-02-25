@@ -83,3 +83,11 @@ Attempt to bypass moderation (obfuscation/evasion) and PII redaction (format edg
 Design evasion attempts for moderation and keyword filters.
 Identify PII formats your redactor misses.
 Patch and validate fixes with repeatable tests.
+
+## Project 20 - Day 20 is hands-on open-source experimentation
+Runnin a local model and compare latency/quality to a hosted closed model. This makes the "open vs closed" trade-offs concrete through practical experience.
+
+- ## Objectives
+Run a local inference server (recommended: Ollama).
+Call a local model via an OpenAI-compatible base URL.
+Measure and compare response latency and quality.
