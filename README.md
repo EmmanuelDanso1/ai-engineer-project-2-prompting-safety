@@ -91,3 +91,11 @@ Runnin a local model and compare latency/quality to a hosted closed model. This 
 Run a local inference server (recommended: Ollama).
 Call a local model via an OpenAI-compatible base URL.
 Measure and compare response latency and quality.
+
+## Project 22 - Fine Tuning Fundamentals
+what data format looks like, and why it differs from prompt engineering and RAG.
+
+- ## Learning Objectives (Day 22)
+Identify a behavior/style/format problem that fine-tuning could solve.
+Design a dataset shape for fine-tuning (chat-style JSONL).
+Explain why fine-tuning might be more reliable than prompting for repetitive tasks.
