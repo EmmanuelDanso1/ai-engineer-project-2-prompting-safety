@@ -1,3 +1,4 @@
+# automated dataset to create a jsonl(json line format)
 import json
 from pathlib import Path
 import random
