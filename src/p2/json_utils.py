@@ -1,69 +1,38 @@
-# BOOK_RECOMMENDATION_SCHEMA_KEYS: tuple[str, ...] = (
-#     "title",
-#     "author",
-#     "genre",
-#     "reasoning",
-# )
+SUMMARY_SCHEMA_KEYS: tuple[str, ...] = ("title", "summary", "keywords")
 
 
-# def validate_exact_keys(
-#     obj: dict,
-#     *,
-#     required_keys: tuple[str, ...],
-# ) -> None:
-#     """
-#     Validate that obj:
-#     - is a dict
-#     - contains exactly the required keys
-#     - contains no extra keys
-#     - all values are strings
-#     """
-#     if not isinstance(obj, dict):
-#         raise ValueError("Output is not a JSON object")
+def validate_summary_payload(obj: dict) -> None:
+    """
+    Validate summary payload against schema rules.
 
-#     obj_keys = set(obj.keys())
-#     required = set(required_keys)
+    Rules:
+    - Exact keys must match SUMMARY_SCHEMA_KEYS
+    - title and summary must be strings
+    - keywords must be list[str] with length between 3 and 8
+    """
 
-#     if obj_keys != required:
-#         missing = required - obj_keys
-#         extra = obj_keys - required
-#         raise ValueError(
-#             f"Invalid keys. Missing: {missing}, Extra: {extra}"
-#         )
+    if not isinstance(obj, dict):
+        raise ValueError("Payload must be a dictionary")
 
-#     for key, value in obj.items():
-#         if not isinstance(value, str):
-#             raise ValueError(f"Value for '{key}' must be a string")
-
-CODEGEN_SCHEMA_KEYS: tuple[str, ...] = (
-    "function_name",
-    "dependencies",
-    "description",
-    "code",
-)
-
-def validate_exact_keys(obj: dict, expected_keys: tuple[str, ...]) -> None:
-    if set(obj.keys()) != set(expected_keys):
+    if tuple(sorted(obj.keys())) != tuple(sorted(SUMMARY_SCHEMA_KEYS)):
         raise ValueError(
-            f"Invalid keys. Expected {expected_keys}, got {tuple(obj.keys())}"
+            f"Invalid keys. Expected {SUMMARY_SCHEMA_KEYS}, got {tuple(obj.keys())}"
         )
 
-def validate_codegen_payload(obj: dict) -> None:
-    validate_exact_keys(obj, CODEGEN_SCHEMA_KEYS)
+    if not isinstance(obj["title"], str):
+        raise ValueError("title must be a string")
 
-    if not isinstance(obj["function_name"], str):
-        raise TypeError("function_name must be a string")
+    if not isinstance(obj["summary"], str):
+        raise ValueError("summary must be a string")
 
-    if not isinstance(obj["description"], str):
-        raise TypeError("description must be a string")
+    keywords = obj["keywords"]
 
-    if not isinstance(obj["code"], str):
-        raise TypeError("code must be a string")
+    if not isinstance(keywords, list):
+        raise ValueError("keywords must be a list")
 
-    dependencies = obj["dependencies"]
-    if not isinstance(dependencies, list):
-        raise TypeError("dependencies must be a list")
+    if not (3 <= len(keywords) <= 8):
+        raise ValueError("keywords must contain between 3 and 8 items")
 
-    for dep in dependencies:
-        if not isinstance(dep, str):
-            raise TypeError("dependencies must be list[str]")
+    for k in keywords:
+        if not isinstance(k, str):
+            raise ValueError("keywords must be list[str]")
